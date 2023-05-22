@@ -24,8 +24,8 @@
         <div class="card mb-3">
             <div class="card-body">
                 <div class="input-group">
-                    <input id="txtSearch" type="text" class="form-control">
-                    <button id="btnSearch" type="button" class="btn btn-primary">Yükle</button>
+                    <input id="txtSearch" type="text" class="form-control" placeholder="Type a country name">
+                    <button id="btnSearch" type="button" class="btn btn-primary">Load</button>
                     <button id="btnLocation" type="button" class="btn btn-danger">
                         <i class="fa-solid fa-location-crosshairs"></i>
                     </button>
@@ -37,7 +37,7 @@
           </div>
         <div id="details">        
             <div class="card mb-3">
-                <div class="card-header">Arama Sonucu</div>
+                <div class="card-header">Search Result</div>
                 <div class="card-body">
                     <div class="row" id="country-details">
 
@@ -45,7 +45,7 @@
                 </div>
             </div>
             <div class="card mb-3">
-                <div class="card-header">Komşu Ülkeler</div>
+                <div class="card-header">Neighbor Countries</div>
                 <div class="card-body">
                     <div class="row" id="neighbors">
 
@@ -100,13 +100,13 @@
         try {
             const response = await fetch('https://restcountries.com/v3.1/name/' + country);
             if(!response.ok)
-                throw new Error("ülke bulunamadı");
+                throw new Error("country not found");
             const data = await response.json();
             renderCountry(data[0]);
     
             const countries = data[0].borders;
             if(!countries) 
-                throw new Error("komşu ülke bulunamadı.");
+                throw new Error("neighbor country not found.");
 
             const response2 = await fetch('https://restcountries.com/v3.1/alpha?codes=' + countries.toString());
             const neighbors = await response2.json();
